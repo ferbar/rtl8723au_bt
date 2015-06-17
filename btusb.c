@@ -3115,6 +3115,7 @@ static int btusb_probe(struct usb_interface *intf,
 	int i, err;
 
 	BT_DBG("intf %p id %p", intf, id);
+	pr_info("Entered %s\n", __func__);
 
 	/* interface numbers are hardcoded in the spec */
 	if (intf->cur_altsetting->desc.bInterfaceNumber != 0)
@@ -3128,8 +3129,10 @@ static int btusb_probe(struct usb_interface *intf,
 			id = match;
 	}
 
-	if (id->driver_info == BTUSB_IGNORE)
+	if (id->driver_info == BTUSB_IGNORE) {
+		pr_info("Exit because BTUSB_IGNORE set\n");
 		return -ENODEV;
+	}
 
 	if (id->driver_info & BTUSB_ATH3012) {
 		struct usb_device *udev = interface_to_usbdev(intf);
@@ -3141,8 +3144,10 @@ static int btusb_probe(struct usb_interface *intf,
 	}
 
 	data = devm_kzalloc(&intf->dev, sizeof(*data), GFP_KERNEL);
-	if (!data)
+	if (!data) {
+		pr_info("exit because devm_kzalloc failed\n");
 		return -ENOMEM;
+	}
 
 	for (i = 0; i < intf->cur_altsetting->desc.bNumEndpoints; i++) {
 		ep_desc = &intf->cur_altsetting->endpoint[i].desc;
@@ -3163,8 +3168,11 @@ static int btusb_probe(struct usb_interface *intf,
 		}
 	}
 
-	if (!data->intr_ep || !data->bulk_tx_ep || !data->bulk_rx_ep)
+	if (!data->intr_ep || !data->bulk_tx_ep || !data->bulk_rx_ep) {
+		pr_info("Exit with missing EP %p %p %p\n", data->intr_ep,
+			data->bulk_tx_ep, data->bulk_rx_ep);
 		return -ENODEV;
+	}
 
 	if (id->driver_info & BTUSB_AMP) {
 		data->cmdreq_type = USB_TYPE_CLASS | 0x01;
@@ -3198,8 +3206,10 @@ static int btusb_probe(struct usb_interface *intf,
 	}
 
 	hdev = hci_alloc_dev();
-	if (!hdev)
+	if (!hdev) {
+		pr_info("hci_alloc_dev failed\n");
 		return -ENOMEM;
+	}
 
 	hdev->bus = HCI_USB;
 	hci_set_drvdata(hdev, data);
@@ -3344,6 +3354,7 @@ static int btusb_probe(struct usb_interface *intf,
 		if (err < 0) {
 			BT_ERR("failed to set interface 0, alt 0 %d", err);
 			hci_free_dev(hdev);
+			pr_info("failed to set interface 0, alt 0 %d", err);
 			return err;
 		}
 	}
@@ -3352,6 +3363,7 @@ static int btusb_probe(struct usb_interface *intf,
 		err = usb_driver_claim_interface(&btusb_driver,
 						 data->isoc, data);
 		if (err < 0) {
+			pr_info("No driver claimed interface\n");
 			hci_free_dev(hdev);
 			return err;
 		}
@@ -3359,6 +3371,7 @@ static int btusb_probe(struct usb_interface *intf,
 
 	err = hci_register_dev(hdev);
 	if (err < 0) {
+		pr_info("hci_register_dev failed\n");
 		hci_free_dev(hdev);
 		return err;
 	}
