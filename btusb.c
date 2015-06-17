@@ -148,8 +148,58 @@ static const struct usb_device_id btusb_table[] = {
 	{ USB_DEVICE(0x8087, 0x0a5a),
 	  .driver_info = BTUSB_INTEL_BOOT | BTUSB_BROKEN_ISOC },
 
-	/* Realtek devices */
-	{ USB_VENDOR_AND_INTERFACE_INFO(0x0bda, 0xff, 0x01, 0x01) },
+	/* Realtek 8723AE Bluetooth devices */
+	{ USB_DEVICE(0x0930, 0x021d), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x0723), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x8723), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x13d3, 0x3394), .driver_info = BTUSB_RTL8723A },
+
+	/* Realtek 8723AU Bluetooth devices */
+	{ USB_DEVICE(0x0bda, 0x0724), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x1724), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x8725), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x872a), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0x872b), .driver_info = BTUSB_RTL8723A },
+	{ USB_DEVICE(0x0bda, 0xa724), .driver_info = BTUSB_RTL8723A },
+
+	/* Realtek 8723BE Bluetooth devices */
+	{ USB_DEVICE(0x0489, 0xe085), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0489, 0xe08b), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0930, 0x0222), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb001), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb002), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb003), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb004), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb005), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb723), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb728), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb72b), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3410), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3416), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3459), .driver_info = BTUSB_RTL8723B },
+
+	/* Realtek 8723BU Bluetooth devices */
+	{ USB_DEVICE(0x0bda, 0xb720), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb72a), .driver_info = BTUSB_RTL8723B },
+
+	/* Realtek 8821AE Bluetooth devices */
+	{ USB_DEVICE(0x0b05, 0x17dc), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0x0821), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0x8821), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3414), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3458), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3461), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x13d3, 0x3462), .driver_info = BTUSB_RTL8723B },
+
+	/* Realtek 8821AU Bluetooth devices */
+	{ USB_DEVICE(0x0bda, 0x0823), .driver_info = BTUSB_RTL8723B },
+
+	/* Realtek 8761AU Bluetooth devices */
+	{ USB_DEVICE(0x0bda, 0x8760), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0x8761), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0x8a60), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xa761), .driver_info = BTUSB_RTL8723B },
+	{ USB_DEVICE(0x0bda, 0xb761), .driver_info = BTUSB_RTL8723B },
 
 	{ }	/* Terminating entry */
 };
@@ -286,59 +336,6 @@ static const struct usb_device_id blacklist_table[] = {
 	/* Other Intel Bluetooth devices */
 	{ USB_VENDOR_AND_INTERFACE_INFO(0x8087, 0xe0, 0x01, 0x01),
 	  .driver_info = BTUSB_IGNORE },
-
-	/* Realtek 8723AE Bluetooth devices */
-	{ USB_DEVICE(0x0930, 0x021d), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x0723), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x8723), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x13d3, 0x3394), .driver_info = BTUSB_RTL8723A },
-
-	/* Realtek 8723AU Bluetooth devices */
-	{ USB_DEVICE(0x0bda, 0x0724), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x1724), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x8725), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x872a), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0x872b), .driver_info = BTUSB_RTL8723A },
-	{ USB_DEVICE(0x0bda, 0xa724), .driver_info = BTUSB_RTL8723A },
-
-	/* Realtek 8723BE Bluetooth devices */
-	{ USB_DEVICE(0x0489, 0xe085), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0489, 0xe08b), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0930, 0x0222), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb001), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb002), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb003), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb004), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb005), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb723), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb728), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb72b), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3410), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3416), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3459), .driver_info = BTUSB_RTL8723B },
-
-	/* Realtek 8723BU Bluetooth devices */
-	{ USB_DEVICE(0x0bda, 0xb720), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb72a), .driver_info = BTUSB_RTL8723B },
-
-	/* Realtek 8821AE Bluetooth devices */
-	{ USB_DEVICE(0x0b05, 0x17dc), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0x0821), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0x8821), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3414), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3458), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3461), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x13d3, 0x3462), .driver_info = BTUSB_RTL8723B },
-
-	/* Realtek 8821AU Bluetooth devices */
-	{ USB_DEVICE(0x0bda, 0x0823), .driver_info = BTUSB_RTL8723B },
-
-	/* Realtek 8761AU Bluetooth devices */
-	{ USB_DEVICE(0x0bda, 0x8760), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0x8761), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0x8a60), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xa761), .driver_info = BTUSB_RTL8723B },
-	{ USB_DEVICE(0x0bda, 0xb761), .driver_info = BTUSB_RTL8723B },
 
 	{ }	/* Terminating entry */
 };
