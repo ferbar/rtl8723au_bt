@@ -329,6 +329,12 @@ static const struct usb_device_id blacklist_table[] = {
 	/* Silicon Wave based devices */
 	{ USB_DEVICE(0x0c10, 0x0000), .driver_info = BTUSB_SWAVE },
 
+	// [chris]
+
+	/*8723BU*/
+	{ USB_DEVICE(0x0bda, 0xb720), .driver_info = BTUSB_REALTEK },
+	{ USB_DEVICE(0x0bda, 0xb72a), .driver_info = BTUSB_REALTEK },
+
 	{ }	/* Terminating entry */
 };
 
@@ -2741,7 +2747,7 @@ static int btusb_probe(struct usb_interface *intf,
 		hdev->set_bdaddr = btusb_set_bdaddr_ath3012;
 	}
 
-#ifdef CONFIG_BT_HCIBTUSB_RTL
+#ifdef CONFIG_BT_RTL
 	if (id->driver_info & BTUSB_REALTEK) {
 		hdev->setup = btrtl_setup_realtek;
 
